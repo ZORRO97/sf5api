@@ -7,10 +7,28 @@ use App\Repository\SejourRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * @ApiResource()
  * @ORM\Entity(repositoryClass=SejourRepository::class)
+ * @ApiResource(
+ *     collectionOperations={
+ *      "get"={
+ *          "normalization_context"={"groups"={"sejour_read"}}
+ *          },
+ *      "post"
+ *     },
+ *     itemOperations={
+ *          "get"={
+ *              "normalization_context"={
+ *                  "groups"={"sejour_details_read"}
+ *               }
+ *          },
+ *          "put",
+ *          "patch",
+ *          "delete"
+ *     }
+ * )
  */
 class Sejour
 {
@@ -18,42 +36,50 @@ class Sejour
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"user_read","user_details_read","sejour_read","sejour_details_read","transaction_details_read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=200)
+     * @Groups({"user_read","user_details_read","sejour_read","sejour_details_read","transaction_details_read"})
      */
     private $description;
 
     /**
      * @ORM\Column(type="float")
+     * @Groups({"user_read","user_details_read","sejour_read","sejour_details_read","transaction_details_read"})
      */
     private $prix;
 
     /**
      * @ORM\Column(type="float")
+     * @Groups({"user_read","user_details_read","sejour_read","sejour_details_read","transaction_details_read"})
      */
     private $somme_reglee;
 
     /**
      * @ORM\Column(type="date")
+     * @Groups({"user_read","user_details_read","sejour_read","sejour_details_read","transaction_details_read"})
      */
     private $date_debut;
 
     /**
      * @ORM\Column(type="date")
+     * @Groups({"user_read","user_details_read","sejour_read","sejour_details_read","transaction_details_read"})
      */
     private $date_fin;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="sejours")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"sejour_details_read"})
      */
     private $user;
 
     /**
      * @ORM\OneToMany(targetEntity=Transaction::class, mappedBy="sejour", orphanRemoval=true)
+     * @Groups({"sejour_details_read"})
      */
     private $transactions;
 
