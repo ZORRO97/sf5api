@@ -19,3 +19,7 @@
 ###> lexik/jwt-authentication-bundle ###
 /config/jwt/*.pem
 ###< lexik/jwt-authentication-bundle ###
+/.idea/dataSources/94aba277-b586-4f70-b820-1c2668f4b887.xml
+/.idea/dataSources.local.xml
+/.idea/dataSources.xml
+/.idea/dataSources/94aba277-b586-4f70-b820-1c2668f4b887/storage_v2/_src_/schema/information_schema.FNRwLQ.meta
